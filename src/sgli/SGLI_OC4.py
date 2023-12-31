@@ -27,3 +27,7 @@ class SGLIOC4Estimator(Estimator):
         # OC4:
         x = np.log10(np.max([b1/g, b2/g, b3/g], axis=0))
         return np.power(10, (a0 + (a1 * x) + (a2 * x * x) + (a3 * x * x * x) + (a4 * x * x * x * x)))
+    
+    def evaluate(self, rrs, y_true, figure=False):
+        y_pred = self.estimate(rrs)
+        super().evaluate(y_true, y_pred, "OC4 Chla", figure)

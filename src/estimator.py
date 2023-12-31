@@ -9,6 +9,9 @@
 
 
 import numpy as np
+from src.evaluate.metrics import *
+from src.evaluate.scatter_plot import scatter_plot
+
 class Estimator:
     def __init__(self) -> None:
         pass
@@ -24,3 +27,25 @@ class Estimator:
          - chla: numpy ndarray -> corresponding Chla concentration
         '''
         pass
+    def evaluate(self, y_true, y_pred, algorithm_name, figure=False):
+        RMSE = root_mean_squared_error(y_true, y_pred)
+        MAPE = mean_absolute_percentage_error(y_true, y_pred)
+        BIAS = bias_metric(y_true, y_pred)
+        MAE = mean_absolute_error(y_true, y_pred)
+
+        print("evaluating algorithm: ", algorithm_name)
+
+        print("RMSE: ", RMSE)
+        print("MAE: ", MAE)
+        print("MAPE: ", MAPE)
+        print("BIAS: ", BIAS)
+
+        if figure:
+            scatter_plot(y_true, y_pred, {
+                "RMSE": RMSE,
+                "MAE": MAE,
+                "MAPE": MAPE,
+                "BIAS": BIAS
+            }, log=True, title=algorithm_name,
+                x_axis="In situ Chla (mg/m3)",
+                y_axis="Calculated Chla (mg/m3)")

@@ -20,3 +20,7 @@ class SGLI2BExpEstimator(Estimator):
         # 2 band exponential:
         ratio = np.divide(rrs[:, 6], rrs[:, 5])
         return np.power((b * ratio + c), a)
+    
+    def evaluate(self, rrs, y_true, figure=False):
+        y_pred = self.estimate(rrs)
+        super().evaluate(y_true, y_pred, "2-band exponential Chla", figure)

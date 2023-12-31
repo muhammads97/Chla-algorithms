@@ -24,3 +24,7 @@ class SGLIBlendEstimator(Estimator):
         chloci = SGLIOCIEstimator().estimate(rrs)
         chl2b = SGLI2BLinEstimator().estimate(rrs)
         return np.multiply(w, chl2b) + np.multiply(np.abs(w-1), chloci)
+    
+    def evaluate(self, rrs, y_true, figure=False):
+        y_pred = self.estimate(rrs)
+        super().evaluate(y_true, y_pred, "Blend Chla", figure)

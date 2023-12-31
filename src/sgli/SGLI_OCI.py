@@ -25,6 +25,10 @@ class SGLIOCIEstimator(Estimator):
         chl[condition] = temp[condition]
         return chl
     
+    def evaluate(self, rrs, y_true, figure=False):
+        y_pred = self.estimate(rrs)
+        super().evaluate(y_true, y_pred, "OCI Chla", figure)
+    
     def _CI_chla(self, rrs:np.ndarray):
         b = rrs[:, 2]
         g = rrs[:, 5]

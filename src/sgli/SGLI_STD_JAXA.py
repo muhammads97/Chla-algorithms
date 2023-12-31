@@ -8,7 +8,6 @@
 #
 
 from src.estimator import Estimator
-from src.sgli.SGLI_OC3 import SGLIOC3Estimator
 import numpy as np
 
 class SGLISTDEstimator(Estimator):
@@ -20,6 +19,10 @@ class SGLISTDEstimator(Estimator):
         wci[wci > 1] = 1
         wci[wci < 0] = 0
         return np.multiply(chl_ci, wci) + np.multiply(oc4, (1-wci))
+    
+    def evaluate(self, rrs, y_true, figure=False):
+        y_pred = self.estimate(rrs)
+        super().evaluate(y_true, y_pred, "JAXA's Standard Chla", figure)
     
     def _CI_chla(self, rrs:np.ndarray):
         b = rrs[:, 2]
