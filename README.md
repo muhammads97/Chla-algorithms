@@ -13,8 +13,6 @@
     <br> 
     Acknowledgment: This project was developed as part of my master's degree at Kyoto University of Advanced Science, under the Remote Sensing Laboratory. 
     <br> 
-    This project is built for research purposes to collect and extract data.
-    <br> 
     The research contributes towards my master's degree, under the supervision of Professor Salem Ibrahim Salem.
     <br> 
 </p>
@@ -39,9 +37,9 @@ and use the following command line arguments:
 
 ### SGLI
 
-**bands**: [Rrs_380, Rrs_412, Rrs_443, Rrs_490, Rrs_530, Rrs_565, Rrs_673] \
+**bands**: [Rrs_380, Rrs_412, Rrs_443, Rrs_490, Rrs_530, Rrs_565, Rrs_673] 
 
-**Algorithms:** \
+**Algorithms:** 
 
 1. OC3
 2. OC4
