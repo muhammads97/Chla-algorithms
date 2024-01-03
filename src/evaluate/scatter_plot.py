@@ -107,7 +107,6 @@ def scatter_plot(
         ax.scatter(
             x_c,
             y_c,
-            label=title,
             alpha=0.5,
             facecolor=colors[cl],
             marker="o",
@@ -129,6 +128,7 @@ def scatter_plot(
     plt.rc("axes", labelsize=14)
     ax.set_xlabel(x_axis)
     ax.set_ylabel(y_axis)
+    ax.set_title(title)
 
     for k in legend_dict.keys():
         ax.plot([], [], " ", label="%s: %.2f" % (k, legend_dict[k]))
