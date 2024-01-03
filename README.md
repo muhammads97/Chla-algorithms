@@ -33,6 +33,10 @@ and use the following command line arguments:
 - [--csv_path]: path to csv file containing the input rrs and optionally Chla. rrs columns' headers should be in the format: Rrs_<wavelength> and the sensors' rrs bands should all be available as described in the sensor rrs values below. Chla should be provided if the the --evaluate option is present.
 - [--evaluate]: this argument is optional, if set, Chla column must be within the csv.
 
+- [--figure]: optional: in case of evaluate it will plot a scatterplot
+- [--classes]: optional: in case of figure it will color code the scatterplot according to low/mid/high Chla.
+
+
 ## sensors and algorithms
 
 ### SGLI
