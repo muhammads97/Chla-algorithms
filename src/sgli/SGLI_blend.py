@@ -12,19 +12,19 @@ import numpy as np
 from src.sgli.SGLI_2band_linear import SGLI2BLinEstimator
 from src.sgli.SGLI_OCI import SGLIOCIEstimator
 
-class SGLIBlendEstimator(Estimator):
 
+class SGLIBlendEstimator(Estimator):
     def estimate(self, rrs: np.ndarray):
         ratio = np.divide(rrs[:, 6], rrs[:, 5])
         phi = np.ones(ratio.shape)
         phi = phi * ratio
         phi[ratio < 0.75] = 0.75
         phi[ratio > 1.15] = 1.15
-        w = (phi - 0.75)/(1.15 - 0.75)
+        w = (phi - 0.75) / (1.15 - 0.75)
         chloci = SGLIOCIEstimator().estimate(rrs)
         chl2b = SGLI2BLinEstimator().estimate(rrs)
-        return np.multiply(w, chl2b) + np.multiply(np.abs(w-1), chloci)
-    
-    def evaluate(self, rrs, y_true, figure=False):
+        return np.multiply(w, chl2b) + np.multiply(np.abs(w - 1), chloci)
+
+    def evaluate(self, rrs, y_true, figure=False, classes=False):
         y_pred = self.estimate(rrs)
-        super().evaluate(y_true, y_pred, "Blend Chla", figure)
+        super().evaluate(y_true, y_pred, "Blend Chla", figure, classes)

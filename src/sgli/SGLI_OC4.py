@@ -10,8 +10,8 @@
 from src.estimator import Estimator
 import numpy as np
 
-class SGLIOC4Estimator(Estimator):
 
+class SGLIOC4Estimator(Estimator):
     def estimate(self, rrs: np.ndarray):
         # coeffs:
         a0: float = 0.43171
@@ -20,14 +20,16 @@ class SGLIOC4Estimator(Estimator):
         a3: float = 0.36690
         a4: float = -0.80127
         # 4 bands' reflectance:
-        b1 = rrs[:, 1] # 412 nm
-        b2 = rrs[:, 2] # 443 nm
-        b3 = rrs[:, 3] # 490 nm
-        g  = rrs[:, 5] # 565 nm
+        b1 = rrs[:, 1]  # 412 nm
+        b2 = rrs[:, 2]  # 443 nm
+        b3 = rrs[:, 3]  # 490 nm
+        g = rrs[:, 5]  # 565 nm
         # OC4:
-        x = np.log10(np.max([b1/g, b2/g, b3/g], axis=0))
-        return np.power(10, (a0 + (a1 * x) + (a2 * x * x) + (a3 * x * x * x) + (a4 * x * x * x * x)))
-    
-    def evaluate(self, rrs, y_true, figure=False):
+        x = np.log10(np.max([b1 / g, b2 / g, b3 / g], axis=0))
+        return np.power(
+            10, (a0 + (a1 * x) + (a2 * x * x) + (a3 * x * x * x) + (a4 * x * x * x * x))
+        )
+
+    def evaluate(self, rrs, y_true, figure=False, classes=False):
         y_pred = self.estimate(rrs)
-        super().evaluate(y_true, y_pred, "OC4 Chla", figure)
+        super().evaluate(y_true, y_pred, "OC4 Chla", figure, classes)

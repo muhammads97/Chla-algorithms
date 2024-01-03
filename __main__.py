@@ -25,9 +25,8 @@ if __name__ == "__main__":
         if type(y) == type(None):
             print("Chla column doesn't exist in csv.")
             exit(1)
-        estimator.evaluate(x, y, figure=args.figure)
+        estimator.evaluate(x, y, figure=args.figure, classes=args.classes)
     else:
         x, _ = load_data(args.csv_path, wavelengths)
         preds = estimator.estimate(x)
         write_chla(args.csv_path, args.algorithm, args.sensor, preds)
-        

@@ -10,8 +10,8 @@
 from src.estimator import Estimator
 import numpy as np
 
-class SGLI2BExpEstimator(Estimator):
 
+class SGLI2BExpEstimator(Estimator):
     def estimate(self, rrs: np.ndarray):
         # coeffs:
         a: float = 0.57888368
@@ -20,7 +20,7 @@ class SGLI2BExpEstimator(Estimator):
         # 2 band exponential:
         ratio = np.divide(rrs[:, 6], rrs[:, 5])
         return np.power((b * ratio + c), a)
-    
-    def evaluate(self, rrs, y_true, figure=False):
+
+    def evaluate(self, rrs, y_true, figure=False, classes=False):
         y_pred = self.estimate(rrs)
-        super().evaluate(y_true, y_pred, "2-band exponential Chla", figure)
+        super().evaluate(y_true, y_pred, "2-band exponential Chla", figure, classes)

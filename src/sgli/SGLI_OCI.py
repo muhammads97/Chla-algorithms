@@ -11,8 +11,8 @@ from src.estimator import Estimator
 from src.sgli.SGLI_OC3 import SGLIOC3Estimator
 import numpy as np
 
-class SGLIOCIEstimator(Estimator):
 
+class SGLIOCIEstimator(Estimator):
     def estimate(self, rrs: np.ndarray):
         ci = self._CI_chla(rrs)
         oc3 = SGLIOC3Estimator().estimate(rrs)
@@ -24,15 +24,15 @@ class SGLIOCIEstimator(Estimator):
         temp = np.multiply(w, oc3) + np.multiply(np.abs(w - 1), ci)
         chl[condition] = temp[condition]
         return chl
-    
-    def evaluate(self, rrs, y_true, figure=False):
+
+    def evaluate(self, rrs, y_true, figure=False, classes=False):
         y_pred = self.estimate(rrs)
-        super().evaluate(y_true, y_pred, "OCI Chla", figure)
-    
-    def _CI_chla(self, rrs:np.ndarray):
+        super().evaluate(y_true, y_pred, "OCI Chla", figure, classes)
+
+    def _CI_chla(self, rrs: np.ndarray):
         b = rrs[:, 2]
         g = rrs[:, 5]
         r = rrs[:, 6]
-        ci = g - b - (((565-443)/(673-443))*(r - b))
+        ci = g - b - (((565 - 443) / (673 - 443)) * (r - b))
         chl = np.power(10, (-0.4909 + (191.6590 * ci)))
         return chl
