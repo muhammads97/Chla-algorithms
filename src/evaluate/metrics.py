@@ -22,12 +22,12 @@ def mean_absolute_error(y_true, y_pred):
 
 
 def mean_absolute_percentage_error(y_true, y_pred):
-    mape = np.mean(np.abs((y_true - y_pred)/y_true))*100
+    mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
     return mape
 
 
 def bias_metric(y_true, y_pred):
-    diff = np.subtract(y_true, y_pred)
+    diff = np.subtract(y_pred, y_true)
     return np.nanmean(diff, axis=0)
 
 
